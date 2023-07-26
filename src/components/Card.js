@@ -18,10 +18,10 @@ function MyCard(props) {
             : "https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?20151024034921"
     }
     return (
-        <Card  border="danger"  style={{ width: '18rem'}}>
-            <Card.Img variant="top" src={handleImgURL()} />
+        <Card  style={{margin:"auto"}} style={{ width: '18rem'}}>
+            <Card.Img variant="top" src={handleImgURL()} style={{height:"20rem",objectFit:"cover"}}/>
             <Card.Body>
-                <Card.Title>name - {props.name}</Card.Title>
+                <Card.Title>{props.name}</Card.Title>
                 <Card.Text>
                     This book is sold by {props.displayName}
                 </Card.Text>

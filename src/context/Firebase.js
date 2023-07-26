@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { createContext } from "react";
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged} from 'firebase/auth'
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut} from 'firebase/auth'
 import { addDoc, collection, getFirestore, getDocs, getDoc, doc, query, where } from "firebase/firestore"
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage"
 
@@ -32,6 +32,16 @@ export const FirebaseProvider = (props) => {
     const signupUserWithEmailAndPassword = (email, password)=>createUserWithEmailAndPassword(firebaseAuth, email, password)
     const signinUserWithEmailAndPassword = (email, password)=>signInWithEmailAndPassword(firebaseAuth, email, password)
     const signinWithGoogle =()=> signInWithPopup(firebaseAuth, googleProvider).then(user=>console.log(user))
+
+    const handleSignOut =()=>{
+        signOut(firebaseAuth).then(() => {
+            // Sign-out successful.
+            console.log("signed out")
+          }).catch((error) => {
+            // An error happened.
+            alert(error.message)
+          });
+    }
 
     const handleCreateNewListing = async (name, isbn, price, cover)=>{
         const imageRef = ref(storage, `uploads/images/${Date.now()}${cover.name}`)
@@ -81,7 +91,7 @@ export const FirebaseProvider = (props) => {
         return result
     }
     const isLoggedIn = user ? true : false
-    return <FirebaseContext.Provider value={{signupUserWithEmailAndPassword, signinUserWithEmailAndPassword, signinWithGoogle,handleCreateNewListing, listAllBooks, getImgURL,getBookByID,placeOrder,fetchMyBooks,getOrders,isLoggedIn, user}} >
+    return <FirebaseContext.Provider value={{signupUserWithEmailAndPassword, signinUserWithEmailAndPassword, signinWithGoogle,handleCreateNewListing,handleSignOut, listAllBooks, getImgURL,getBookByID,placeOrder,fetchMyBooks,getOrders,isLoggedIn, user}} >
         {props.children}
     </FirebaseContext.Provider>
 }
