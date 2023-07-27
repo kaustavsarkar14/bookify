@@ -18,6 +18,7 @@ export default function List() {
         await firebase.handleCreateNewListing(name, isbn, price, coverPhoto)
         handleShow()
     }
+    if(!firebase.isLoggedIn) return <h1 className='container' >Please login to list your books</h1>
     return (
         <div className='container'>
             <Modal show={show} onHide={handleClose}>

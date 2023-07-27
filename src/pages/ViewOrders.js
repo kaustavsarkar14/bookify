@@ -9,7 +9,7 @@ export default function ViewOrders() {
         if(firebase.isLoggedIn)
         firebase.fetchMyBooks(firebase.user.uid).then(books=>setBooks(books.docs))
     },[firebase])
-    if(!firebase.isLoggedIn) return <h1>Please log in</h1>
+    if(!firebase.isLoggedIn) return <h1 className='container' >Please log in</h1>
     return (
         <div className='container'>
         {

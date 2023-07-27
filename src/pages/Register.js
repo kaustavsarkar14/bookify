@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useFirebase } from '../context/Firebase';
 import { useNavigate } from 'react-router-dom';
+import GoogleButton from 'react-google-button';
 
 export default function Register() {
     const firebase = useFirebase();
@@ -40,6 +41,8 @@ export default function Register() {
                 <Button disabled={email==='' && password===''} variant="primary" type="submit" onClick={e=>handleClick(e)} >
                     Submit
                 </Button>
+                <h6 className='mt-3 mb-3' >OR</h6>
+                <GoogleButton onClick={firebase.signinWithGoogle} />
             </Form>
         </div>
     )
