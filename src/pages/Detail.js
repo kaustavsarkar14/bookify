@@ -49,7 +49,7 @@ export default function Detail() {
                 </Modal.Footer>
             </Modal>
             <h2>{data.name}</h2>
-            <img src={url ? url : "https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?20151024034921"} style={{ height: "25rem", width: "30rem", objectFit: "cover", borderRadius: "0.5rem" }} alt="" />
+            <img src={url ? url : "https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?20151024034921"} style={{ height: "24rem", width: "16rem", objectFit: "cover", borderRadius: "0.5rem" }} alt="" />
             <h4 className="mt-5" >Details</h4>
             <p style={{ fontSize: "1.2rem" }} >Price - <Badge bg="success">Rs.{data.price}</Badge></p>
             <p style={{ fontSize: "1.2rem" }} >ISBN - <Badge bg="secondary">{data.isbn}</Badge></p>

@@ -18,10 +18,10 @@ function MyCard(props) {
             : "https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?20151024034921"
     }
     return (
-        <Card  style={{margin:"auto"}} style={{ width: '18rem'}}>
-            <Card.Img variant="top" src={handleImgURL()} style={{height:"20rem",objectFit:"cover"}}/>
+        <Card  style={{ width: '18rem',margin:"auto",marginBottom:"1rem"}}>
+            <Card.Img variant="top" src={handleImgURL()} style={{height:"22rem",objectFit:"cover"}}/>
             <Card.Body>
-                <Card.Title>{props.name}</Card.Title>
+                <Card.Title>{props.name.slice(0,30)}{props.name.length>32?"...":""}{props.name.length>20?<><h6 style={{display:"inline",color:"green",fontWeight:"700"}} >{" Rs."+props.price}</h6></>:<h6 style={{color:"green",fontWeight:"700"}} >{"Rs."+props.price}</h6>}</Card.Title>
                 <Card.Text>
                     This book is sold by {props.displayName}
                 </Card.Text>
