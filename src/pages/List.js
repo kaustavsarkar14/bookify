@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useFirebase } from '../context/Firebase';
-import { Modal } from 'react-bootstrap';
+import { Modal, Spinner } from 'react-bootstrap';
 
 export default function List() {
     const firebase = useFirebase()
@@ -11,14 +11,17 @@ export default function List() {
     const [price, setPrice] = useState('')
     const [coverPhoto, setCoverPhoto] = useState('')
     const [show, setShow] = useState(false);
+    const [clicked, setClicked] = useState(false)
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const handleSubmit = async (e) => {
+        setClicked(true)
         e.preventDefault()
         await firebase.handleCreateNewListing(name, isbn, price, coverPhoto)
         handleShow()
+        setClicked(false)
     }
-    if(!firebase.isLoggedIn) return <h1 className='container' >Please login to list your books</h1>
+    if (!firebase.isLoggedIn) return <h1 className='container' >Please login to list your books</h1>
     return (
         <div className='container'>
             <Modal show={show} onHide={handleClose}>
@@ -45,10 +48,18 @@ export default function List() {
                     <Form.Control onChange={e => setCoverPhoto(e.target.files[0])} type="file" />
                 </Form.Group>
 
+                <Button variant="success" onClick={handleSubmit}>
+                    {!clicked ?
 
-
-                <Button variant="success" type="submit" onClick={handleSubmit}>
-                    Create
+                        <>Create</>
+                        : <><Spinner
+                            as="span"
+                            animation="grow"
+                            size="sm"
+                            role="status"
+                            aria-hidden="true"
+                        />
+                            Loading...</>}
                 </Button>
 
             </Form>
